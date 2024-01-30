@@ -14,24 +14,6 @@
 
 <?php
 
-function formT(){
-    $result = '<form action="" method="get">';
-
-    
-
-
-    return $result;
-}
-
-
-
-
-
-
-
-
-
-
 
 //Tableau d'information
 $nomsInput = [
@@ -39,51 +21,13 @@ $nomsInput = [
     "Prénom", 
     "e-mail",
     "Ville"
-];
-    
-
-//FUNCTION POUR AFFIVHER INFO
-function afficherInput($nomsInput){
-    $result = '<form action="" method="get">';
-
-    foreach ($nomsInput as $key) {
-        $result.='
-                    <label for="'.$key.'">' .$key .'</label>
-                    <input type="text" name="' .$key .'" size="20" maxlength="20"><br>';
-    }
-
-    $result.="</form>";
-
-
-    return $result;
-}
-
+];   
 //TABLEAU
 $elements = [
     "Monsieur",
     "Madame",
     "Mademoiselle"
 ];
-
-//FUNCTION POUR AFFOCHER LE LISTE DEROULANT
-function alimenterListeDeroulante($elements) {
-    $result = '<form action="" method="get">
-                    <select name="sexe" id="sexe">';
-
-     foreach ($elements as $sexe) {
-        $result.='
-                    <option value="'.$sexe .'">'.$sexe.'</option>';
-     } 
-     
-     $result.='</select>
-            </form>';
-
-
-
-
-    return $result;
-
-}
 
 //Tableau de 'choix'
 $listeFormation = [
@@ -93,26 +37,71 @@ $listeFormation = [
     "Chef de projet"=> ""
 ];
 
-function genererCheckbox($listeFormation){
 
-    $result = '<form action="" method="get">
-                <h4>Un Intitulé de formation</h4>';
+//Function pour generer formulair avec un bouton submit
+function genererFormulaire($nomsInput, $elements, $listeFormation){
 
-    foreach ($listeFormation as $choix => $valeur) {
-        $result.='<input type="checkbox" name="'.$choix.'" id = "scale" '.$valeur.' /> <label for="'.$choix.'">'.$choix.'</label><br>';
-    }
-    $result.="</form>";
-    
+            //FUNCTION POUR AFFIVHER INFO
+        function afficherInput($nomsInput){
+            $result = '<form action="" method="get">';
 
-    return $result;
+            foreach ($nomsInput as $key) {
+                $result.='
+                            <label for="'.$key.'">' .$key .'</label>
+                            <input type="text" name="' .$key .'" size="20" maxlength="20"><br>';
+            }
+
+            $result.="</form>";
+
+
+            return $result;
+        }
+
+                //FUNCTION POUR AFFOCHER LE LISTE DEROULANT
+        function alimenterListeDeroulante($elements) {
+            $result = '<form action="" method="get">
+                            <select name="sexe" id="sexe">';
+
+            foreach ($elements as $sexe) {
+                $result.='
+                            <option value="'.$sexe .'">'.$sexe.'</option>';
+            } 
+            
+            $result.='</select>
+                    </form>';
+
+
+
+
+            return $result;
+
+        }
+        //Function pour pouvoir choisir la formation
+        function genererCheckbox($listeFormation){
+
+            $result = '<form action="" method="get">
+                        <h4>Un Intitulé de formation</h4>';
+        
+            foreach ($listeFormation as $choix => $valeur) {
+                $result.='<input type="checkbox" name="'.$choix.'" id = "scale" '.$valeur.' /> <label for="'.$choix.'">'.$choix.'</label><br>';
+            }
+            $result.="</form>";
+            
+        
+            return $result;
+        }
+
+        // Affichage du formulaire complet
+        echo '<form action="" method="get">';
+        echo afficherInput($nomsInput);
+        echo alimenterListeDeroulante($elements);
+        echo genererCheckbox($listeFormation);
+        echo '<input type="submit" value="Soumettre">';
+        echo '</form>';
+
+
+
 }
 
-
-
-
-
-
-echo afficherInput($nomsInput);
-echo alimenterListeDeroulante($elements);
-echo genererCheckbox($listeFormation);
-
+// Appel de la fonction pour générer le formulaire
+genererFormulaire($nomsInput, $elements, $listeFormation);
