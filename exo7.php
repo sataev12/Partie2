@@ -23,7 +23,7 @@ function genererCheckbox($elements){
     $result = '<form action="" method="get">';
 
     foreach ($elements as $choix => $valeur) {
-        $result.='<input type="checkbox" name="'.$choix.'[]" id = "scale" '.$valeur.' /> <label for="'.$choix.'">'.$choix.'</label><br>';
+        $result.='<input type="checkbox" name="'.$choix.'" id = "scale" '.$valeur.' /> <label for="'.$choix.'">'.$choix.'</label><br>';
     }
     $result.="</form>";
     
