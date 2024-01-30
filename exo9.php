@@ -17,21 +17,21 @@
 <?php
 
 $tableau = [
-    "Masculin"=>"Monsieur",
-    "Fémenin"=>"Madame",
-    "Mademoiselle"=>"Atre"
+    "Masculin",
+    "Fémenin",
+    "Mademoiselle"
 ];
 
 
 function afficherRadio($tableau){
-    $result = "<div>";
+    $result = '<form action="" method="get">';
 
-    foreach ($tableau as $key => $value) {
+    foreach ($tableau as $key) {
         $result.='<input type="radio" id = "'.$key.'" name = "'.$key.'" value = "'.$key.'"/>
                 <label for = "'.$key.'">'.$key.'</label><br>';
     }
     
-    $result.="</div>";
+    $result.="</form>";
 
 
     return $result;
