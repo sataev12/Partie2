@@ -25,6 +25,7 @@ pour vérifier la cohérance de la classe de Voiture. </p>
         private bool $stopper = true;
 
 
+
         public function __construct($marque, $modele, $nbPortes)
         {
             $this->marque = $marque;
@@ -113,49 +114,44 @@ pour vérifier la cohérance de la classe de Voiture. </p>
                 return $this;
         }
 
-
-        //Méthode demarrer
-        public function demarrer(){
-            if ($this->estDemarre == true){
-                echo "Le véhicule {$this->marque} {$this->modele} démarre";
-            }else{
-                echo "Le véhicule {$this->marque} {$this->modele} n'est pas démarrée";
-            }
-         }
-        //Méthode accelerer
-        public function accelerer(){
-            echo "Le véhicule {$this->marque} {$this->modele} accélère de {$this->vitesseActuelle} km/h";
-         }
-
+                //Méthode demarrer
+                public function demarrer(){
+                    if ($this->estDemarre == true){
+                        echo "Le véhicule {$this->marque} {$this->modele} est déjà démarré";
+                    }else{
+                        $this->estDemarre = true;
+                    }
+                 }
+                //Méthode accelerer
+                public function accelerer($vitesse){
+                    $vitesse = $vitesse + $this->vitesseActuelle;
+                    echo "Le véhicule {$this->marque} {$this->modele} accélère de {$vitesse} km/h";
+                 }
         
-        //Méthode stopper
-        public function stopper(){
-            if($this->stopper == true){
-                echo "Le véhicule {$this->marque} {$this->modele} est stoppée";
-            }else{
-                echo "Le véhicule {$this->marque} {$this->modele} est à l'arrêt";
-            }
-        }
+                
+                //Méthode stopper
+                public function stopper(){
+                    if($this->stopper == true){
+                        echo "Le véhicule {$this->marque} {$this->modele} est stoppée";
+                    }elseif($this->stoppe{
+                        echo "Le véhicule {$this->marque} {$this->modele} est à l'arrêt";
+                    }
+                }
+        
+                //Afficher Infos
+                public function afficheInfo1(){
+                    echo "Info véhicule 1<br>";
+                    echo "****************************<br>";
+                    echo "Nom et modèle du véhicule : {$this->marque} {$this->modele}<br>";
+                    echo "Nombre de portes : {$this->nbPortes}<br>";
+                    echo $this->demarrer()."<br>";
+                    echo "Sa vitesse actuelle est de : {$this->vitesseActuelle} km/h<br>";
+                }
+        
+               
 
-        //Afficher Infos
-        public function afficheInfo1(){
-            echo "Info véhicule 1<br>";
-            echo "****************************<br>";
-            echo "Nom et modèle du véhicule : {$this->marque} {$this->modele}<br>";
-            echo "Nombre de portes : {$this->nbPortes}<br>";
-            echo $this->demarrer()."<br>";
-            echo "Sa vitesse actuelle est de : {$this->vitesseActuelle} km/h<br>";
-        }
-
-        public function afficheInfo2(){
-            echo "Info véhicule 2<br>";
-            echo "****************************<br>";
-            echo "Nom et modèle du véhicule : {$this->marque} {$this->modele}<br>";
-            echo "Nombre de portes : {$this->nbPortes}<br>";
-            echo $this->demarrer()."<br>";
-            echo "Sa vitesse actuelle est de : {$this->vitesseActuelle} km/h<br>";
-        }
-
+                //Methode ralentit(vitesse)
+                public function ralentir() {}
 
 
 
@@ -164,3 +160,4 @@ pour vérifier la cohérance de la classe de Voiture. </p>
 
 $v1 = new Voiture("Peugeot", "408", 5);
 $v1->demarrer();
+$v1->accelerer(15);
