@@ -23,6 +23,9 @@ pour vérifier la cohérance de la classe de Voiture. </p>
         private bool $estDemarre = false;
         private int $accelerer = 0;
         private bool $stopper = true;
+        private int $numeroVehicule;
+        
+        private static int $nbVehicule = 1;
 
 
 
@@ -31,6 +34,8 @@ pour vérifier la cohérance de la classe de Voiture. </p>
             $this->marque = $marque;
             $this->modele = $modele;
             $this->nbPortes = $nbPortes;
+            $this->numeroVehicule = self::$nbVehicule;
+            self::$nbVehicule++;
         }
 
 
@@ -113,51 +118,105 @@ pour vérifier la cohérance de la classe de Voiture. </p>
 
                 return $this;
         }
+        public function getNumeroVehicule()
+        {
+                return $this->numeroVehicule;
+        }
+
+        public function setNumeroVehicule($numeroVehicule)
+        {
+                $this->numeroVehicule = $numeroVehicule;
+
+                return $this;
+        }
+
+
+
+
+
 
                 //Méthode demarrer
                 public function demarrer(){
-                    if ($this->estDemarre == true){
-                        echo "Le véhicule {$this->marque} {$this->modele} est déjà démarré";
+                    if ($this->estDemarre){
+                        echo "Le véhicule {$this->marque} {$this->modele} est déjà démarré<br>";
                     }else{
                         $this->estDemarre = true;
+                        echo "Le véhicule {$this->marque} {$this->modele} démarre<br>";
                     }
                  }
                 //Méthode accelerer
                 public function accelerer($vitesse){
-                    $vitesse = $vitesse + $this->vitesseActuelle;
-                    echo "Le véhicule {$this->marque} {$this->modele} accélère de {$vitesse} km/h";
+                    
+                    if($this->estDemarre){
+                        $this->vitesseActuelle += $vitesse;
+                        echo "Le véhicule {$this->marque} {$this->modele} accélère de {$vitesse} km/h<br>";
+                        echo "Le véhicule {$this->marque} {$this->modele} veut accélèrer de {$vitesse}<br>";
+                    }else{
+                        echo "Pour accélerer, il faut démarrer le véhicule {$this->marque} {$this->modele}<br>";
+                    }
+
                  }
         
                 
                 //Méthode stopper
                 public function stopper(){
-                    if($this->stopper == true){
-                        echo "Le véhicule {$this->marque} {$this->modele} est stoppée";
-                    }elseif($this->stoppe{
-                        echo "Le véhicule {$this->marque} {$this->modele} est à l'arrêt";
+                    if($this->estDemarre == false){
+                        echo "Le véhicule {$this->marque} {$this->modele} est stoppé<br>";
                     }
                 }
-        
+                //Méthode etat de véhicule
+                public function etat(){
+                        if($this->estDemarre){
+                                echo "Le véhicule{$this->marque} est démarré";
+                        }else {
+                                echo "Le véhicule {$this->marque} est à l'arrêt";
+                        
+                        }
+                                
+                }
+                
                 //Afficher Infos
                 public function afficheInfo1(){
-                    echo "Info véhicule 1<br>";
+                    echo "Info véhicule{$this->getNumeroVehicule()} <br>";
                     echo "****************************<br>";
                     echo "Nom et modèle du véhicule : {$this->marque} {$this->modele}<br>";
                     echo "Nombre de portes : {$this->nbPortes}<br>";
-                    echo $this->demarrer()."<br>";
+                    echo $this->etat()."<br>";
                     echo "Sa vitesse actuelle est de : {$this->vitesseActuelle} km/h<br>";
+                }
+
+                //Méthode pour la vitesse
+                public function vitesseAct(){
+                        echo "La vitesse du véhicule {$this->marque} est de : {$this->vitesseActuelle} km/h<br>";
                 }
         
                
 
                 //Methode ralentit(vitesse)
-                public function ralentir() {}
+                public function ralentir($vitesse){
+                        if($this->vitesseActuelle < $vitesse){
+                                echo "Tu ne peut pas ralentir à {$vitesse}, car ta vitesse actuelle est de {$this->vitesseActuelle}<br>";
+                        }else{
+                                echo "Tu ralenti à {$vitesse}<br>";
+                                $this->vitesseActuelle -= $vitesse;
+                        }
+                }
 
 
-
+        
     }
 
 
-$v1 = new Voiture("Peugeot", "408", 5);
-$v1->demarrer();
-$v1->accelerer(15);
+// $v1 = new Voiture("Peugeot", "408", 5);
+// $v1->demarrer();
+// $v1->accelerer(15);
+// $v1->afficheInfo1();
+// $v1->vitesse();
+
+$v2 = new Voiture("BMW", "X5", 5);
+$v2->demarrer();
+$v2->accelerer(10);
+$v2->ralentir(3);
+$v2->vitesseAct();
+// $v2->stopper();
+$v2->afficheInfo1();
